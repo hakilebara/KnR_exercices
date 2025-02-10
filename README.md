@@ -1,2 +1,2 @@
-# K-R-s-The-C-Programming-Language-Exercices
-K&amp;R's The C Programming Language Exercices
+# Exercices from K&R's The C Programming Language book
+
