@@ -7,9 +7,9 @@
 /* 
  * Personal note: My understanding of the exercise is that
  * for the horizontal histogram, the expected output is
- * Length 01 : ****
- * Length 02 : *
- * Length 03 : *****
+ * Length 01 : ####
+ * Length 02 : #
+ * Length 03 : #####
  * etc.
  */
 
@@ -49,7 +49,13 @@ int main() {
 
   
   for (int i = 0; i < MAX_WORD_LENGTH; ++i) {
-    printf("Length %2d: %d\n", i, wcounts[i]);
+    if (wcounts[i] > 0) {
+      printf("Length %2d: ", i);
+      for (int j = 0; j < wcounts[i]; ++j) {
+        printf("#");
+      }
+     printf("\n");
+    }
   }
 
   return 0;
