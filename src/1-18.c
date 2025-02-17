@@ -22,8 +22,10 @@ int main () {
 int trim(char line[]) {
   int i;
 
-  for (i = 0; line[i] != '\n'; ++i);
-  for (--i; i >= 0 && (line[i] == ' ' || line[i] == '\t'); --i);
+  for (i = 0; line[i] != '\n'; ++i)
+    ;
+  for (--i; i >= 0 && (line[i] == ' ' || line[i] == '\t'); --i)
+    ;
   if (i > 0) {
     line[++i] = '\n';
     line[++i] = '\0';
@@ -34,12 +36,15 @@ int trim(char line[]) {
 
 int _getline(char s[], int lim) {
   int i, c, j;
-  j = 0;
-  for (i = 0; (c = getchar()) != EOF && c != '\n'; ++i)
+  i = j = 0;
+
+  while((c = getchar()) != EOF && c != '\n') {
     if (i < lim - 2) {
       s[i] = c;
       ++j;
     }
+    ++i;
+  }
   if (c == '\n') {
     s[j] = c;
     ++j;
