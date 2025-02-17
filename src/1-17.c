@@ -29,6 +29,7 @@ int _getline(char s[], int lim) {
   if (c == '\n') {
     s[j] = c;
     ++j;
+    ++i;
   }
   s[j] = '\0';
 
