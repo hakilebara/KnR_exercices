@@ -8,55 +8,58 @@
 
 void escape(char s[], char t[]) {
   int i, j;
-  for (i = j = 0; s[i] != '\0'; ++i) {
-    switch (s[i]) {
+  for (i = j = 0; t[i] != '\0'; ++i) {
+    switch (t[i]) {
       case '\n':
-        t[j++] = '\\';
-        t[j++] = 'n';
+        s[j++] = '\\';
+        s[j++] = 'n';
         break;
       case '\t':
-        t[j++] = '\\';
-        t[j++] = 't';
+        s[j++] = '\\';
+        s[j++] = 't';
         break;
       default:
-        t[j++] = s[i];
+        s[j++] = t[i];
         break;
     }
   }
+  s[j] = '\0';
 }
 
 void unescape(char s[], char t[]) {
   int i, j, in_seq;
   in_seq = 0;
-  for (i = j = 0; s[i] != '\0'; ++i) {
-    if (s[i] == '\\')
+  for (i = j = 0; t[i] != '\0'; ++i) {
+    if (t[i] == '\\')
       in_seq = 1;
     else if (in_seq) {
-      switch(s[i]) {
+      switch(t[i]) {
         case 'n':
-          t[j++] = '\n';
+          s[j++] = '\n';
           break;
         case 't':
-          t[j++] = '\t';
+          s[j++] = '\t';
           break;
         default: // leave the escape sequence unchanged
-          t[j++] = '\\';
-          t[j++] = s[i];
+          s[j++] = '\\';
+          s[j++] = t[i];
           break;
       }
       in_seq = 0;
     }
     else
-      t[j++] = s[i];
+      s[j++] = t[i];
   }
+  s[j] = '\0';
 }
 
 int main(void) {
-  char s[] = "Bon\tjour";
-  char t[10];
+  char t[] = "Bon\tjour";
+  char s[10];
   escape(s, t);
-  printf("%s\n", t);
+  printf("%s\n", s);
+
   char u[10];
-  unescape("Bon\\tjour", u);
+  unescape(u, "Bon\\tjour");
   printf("%s\n", u);
 }
