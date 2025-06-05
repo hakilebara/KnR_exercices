@@ -31,16 +31,11 @@ void itoa(int n, char s[], int min_width) {
   if (sign < 0) {
     s[i++] = '-';
   }
+  while (i < min_width) {
+    s[i++] = ' ';
+  }
   s[i] = '\0';
   reverse(s);
-
-  if (i < min_width) {
-    int padlength = min_width - i;
-    for (; i >= 0; --i) 
-      s[i+padlength] = s[i];  /* shift all characters of s by padlength */
-    for(int j = 0; j < padlength; ++j)
-      s[j] = ' ';
-  } 
 }
 
 int main() {
