@@ -1,3 +1,6 @@
+/*
+ * Given the basic framework, it's straightforward to extend the calculator. Add the modulus (%) operator and provisions for negative numbers.
+ */
 #include <stdio.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -54,7 +57,7 @@ int getop(char s[])
   while ((s[0] = c = getch()) == ' ' || c == '\t')
     ;
   s[1] = '\0';
-  if (!isdigit(c) && c != '.')
+  if (!isdigit(c) && c != '.' && c != '-')
     return c;           /* not a number */
   i = 0;
   if (isdigit(c))       /* collect the integer part */
@@ -63,6 +66,19 @@ int getop(char s[])
   if (c == '.')
     while (isdigit(s[++i] = c = getch()))
       ;
+  if (c == '-') {
+    // peek into the next char to know whether '-' is followed by a digit
+    char t = getch();
+    ungetch(t);
+
+    // if '-' is followed by a digit I consider it as the negative sign
+    if (isdigit(t))
+      while (isdigit(s[++i] = c = getch()))
+        ;
+    else
+      // otherwise '-' is the minus operator
+      return c;
+  }
   s[i] = '\0';
   if (c != EOF)
     ungetch(c);
