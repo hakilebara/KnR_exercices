@@ -1,5 +1,7 @@
 /*
- * Given the basic framework, it's straightforward to extend the calculator. Add the modulus (%) operator and provisions for negative numbers.
+ * Add the commands to print the top elements of the stack without popping, to
+ * duplicate it, and to swap the top two elements. Add a command to clear the
+ * stack.
  */
 #include <stdio.h>
 #include <ctype.h>
@@ -84,10 +86,21 @@ int getop(char s[])
   return NUMBER;
 }
 
+void dump() {
+  printf("\nStack Dump: \n");
+  for(int pos = sp - 1; pos >= 0; --pos) {
+    printf("stack index pos:%d\t%.8g\n", pos, val[pos]);
+  }
+}
+
+void clear() {
+  sp = 0;
+}
+
 /* reverse Polish calculator */
 int main() {
   int type;
-  double op2;
+  double op2, op3;
   char s[MAXOP];
 
   while ((type = getop(s)) != EOF) {
@@ -115,6 +128,23 @@ int main() {
     case '%':
       op2 = pop();
       push((int)pop() % (int)op2);
+      break;
+    case 'p':           /* print the top elements of the stack */   
+      dump();
+      break;
+    case 'd'            /* duplicate the top element of the stack */:
+      op2 = pop();
+      push(op2);
+      push(op2);
+      break;
+    case 's':           /* swap the top two elements of the stack */
+      op2 = pop();
+      op3 = pop();
+      push(op2);
+      push(op3);
+      break;
+    case 'c':           /* clear the stack */
+      clear();
       break;
     case '\n':
       printf("\t%.8g\n", pop());
