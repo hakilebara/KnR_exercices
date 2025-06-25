@@ -26,7 +26,12 @@ char * _strncat(char *s, char *t, size_t n) {
   *(s-1) = '\0';
   return ss;
 }
-int _strncmp(char *s, char *t, size_t n);
+int _strncmp(char *s, char *t, int n) {
+  for (; --n > 0 && *s == *t; ++s, ++t)
+    if (*s == '\0')
+      return 0;
+  return *s - *t;
+}
 
 int main() {
   char s[50];
@@ -35,4 +40,6 @@ int main() {
 
   char s2[50] = "Hello";
   printf("%s\n", _strncat(s2, " World!", 7));
+
+  printf("%d\n", _strncmp("abcd", "abce", 3));
 }
