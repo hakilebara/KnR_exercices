@@ -6,9 +6,8 @@
 
 /* concatenate t at the end of s, s must be big enough*/
 void _strcat(char *s, char *t) {
-  while(*s++)
-    ;
-  --s;
+  while(*s)
+    ++s;
   while((*s++ = *t++))
     ;
 }
