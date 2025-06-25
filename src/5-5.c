@@ -11,12 +11,9 @@ char* _strncpy(char *s, char *t, size_t n) {
   char *ss = s;
   while(m-- > 0 && (*s++ = *t++))
     ;
-  if (m > 0) {          /* Pad with '\0's if s has fewer characters than n */
-    --s;                /* Erase the '\0' of t */
-    while(m-- > 0)
-      *s++ = '\0';
-  }
-  *(s-1) = '\0';
+  while(m-- > 0)    /* Pad with '\0's if s has fewer characters than n */
+    *s++ = '\0';
+  *(s-1) = '\0';    /* Make sure the return string always ends with \0 */
   return ss;
 }
 
