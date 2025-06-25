@@ -17,9 +17,22 @@ char* _strncpy(char *s, char *t, size_t n) {
   return ss;
 }
 
+char * _strncat(char *s, char *t, size_t n) {
+  char *ss = s;
+  while (*s)
+    ++s;
+  while (n-- > 0 && (*s++ = *t++))
+    ;
+  *(s-1) = '\0';
+  return ss;
+}
+int _strncmp(char *s, char *t, size_t n);
+
 int main() {
   char s[50];
   char t[] = "abc-def-ghi";
-
   printf("%s\n", _strncpy(s, t, sizeof(s))); 
+
+  char s2[50] = "Hello";
+  printf("%s\n", _strncat(s2, " World!", 7));
 }
